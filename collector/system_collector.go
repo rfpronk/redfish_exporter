@@ -191,7 +191,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.Memory()").WithError(err).Error("error getting memory data from system")
 			} else if memories == nil {
-				systemLogContext.WithField("operation", "system.Memory()").Info("no memory data found")
+				//systemLogContext.WithField("operation", "system.Memory()").Info("no memory data found")
 			} else {
 				wg1 := &sync.WaitGroup{}
 				wg1.Add(len(memories))
@@ -210,7 +210,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.Processors()").WithError(err).Error("error getting processor data from system")
 			} else if processors == nil {
-				systemLogContext.WithField("operation", "system.Processors()").Info("no processor data found")
+				//systemLogContext.WithField("operation", "system.Processors()").Info("no processor data found")
 			} else {
 				wg2 := &sync.WaitGroup{}
 				wg2.Add(len(processors))
@@ -229,7 +229,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.Storage()").WithError(err).Error("error getting storage data from system")
 			} else if storages == nil {
-				systemLogContext.WithField("operation", "system.Storage()").Info("no storage data found")
+				//systemLogContext.WithField("operation", "system.Storage()").Info("no storage data found")
 			} else {
 				for _, storage := range storages {
 					if volumes, err := storage.Volumes(); err != nil {
@@ -247,7 +247,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 					if err != nil {
 						systemLogContext.WithField("operation", "system.Drives()").WithError(err).Error("error getting drive data from system")
 					} else if drives == nil {
-						systemLogContext.WithFields(log.Fields{"operation": "system.Drives()", "storage": storage.ID}).Info("no drive data found")
+						//systemLogContext.WithFields(log.Fields{"operation": "system.Drives()", "storage": storage.ID}).Info("no drive data found")
 					} else {
 						wg4 := &sync.WaitGroup{}
 						wg4.Add(len(drives))
@@ -288,7 +288,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.PCIeDevices()").WithError(err).Error("error getting PCI-E device data from system")
 			} else if pcieDevices == nil {
-				systemLogContext.WithField("operation", "system.PCIeDevices()").Info("no PCI-E device data found")
+				//systemLogContext.WithField("operation", "system.PCIeDevices()").Info("no PCI-E device data found")
 			} else {
 				wg5 := &sync.WaitGroup{}
 				wg5.Add(len(pcieDevices))
@@ -302,7 +302,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.NetworkInterfaces()").WithError(err).Error("error getting network interface data from system")
 			} else if networkInterfaces == nil {
-				systemLogContext.WithField("operation", "system.NetworkInterfaces()").Info("no network interface data found")
+				//systemLogContext.WithField("operation", "system.NetworkInterfaces()").Info("no network interface data found")
 			} else {
 				wg6 := &sync.WaitGroup{}
 				wg6.Add(len(networkInterfaces))
@@ -316,7 +316,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.EthernetInterfaces()").WithError(err).Error("error getting ethernet interface data from system")
 			} else if ethernetInterfaces == nil {
-				systemLogContext.WithField("operation", "system.PCIeDevices()").Info("no ethernet interface data found")
+				//systemLogContext.WithField("operation", "system.PCIeDevices()").Info("no ethernet interface data found")
 			} else {
 				wg7 := &sync.WaitGroup{}
 				wg7.Add(len(ethernetInterfaces))
@@ -330,7 +330,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.SimpleStorages()").WithError(err).Error("error getting simple storage data from system")
 			} else if simpleStorages == nil {
-				systemLogContext.WithField("operation", "system.SimpleStorages()").Info("no simple storage data found")
+				//systemLogContext.WithField("operation", "system.SimpleStorages()").Info("no simple storage data found")
 			} else {
 				for _, simpleStorage := range simpleStorages {
 					devices := simpleStorage.Devices
@@ -346,7 +346,7 @@ func (s *SystemCollector) Collect(ch chan<- prometheus.Metric) {
 			if err != nil {
 				systemLogContext.WithField("operation", "system.PCIeFunctions()").WithError(err).Error("error getting PCI-E device function data from system")
 			} else if pcieFunctions == nil {
-				systemLogContext.WithField("operation", "system.PCIeFunctions()").Info("no PCI-E device function data found")
+				//systemLogContext.WithField("operation", "system.PCIeFunctions()").Info("no PCI-E device function data found")
 			} else {
 				wg9 := &sync.WaitGroup{}
 				wg9.Add(len(pcieFunctions))
