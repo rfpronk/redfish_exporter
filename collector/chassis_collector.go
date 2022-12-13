@@ -5,6 +5,7 @@ import (
 	"math"
 	"strings"
 	"sync"
+	"strconv"
 
 	"github.com/apex/log"
 	"github.com/prometheus/client_golang/prometheus"
@@ -350,10 +351,17 @@ func parseChassisPowerInfoPowerControl(ch chan<- prometheus.Metric, chassisID st
 	ch <- prometheus.MustNewConstMetric(chassisMetrics["chassis_power_average_consumed_watts"].desc, prometheus.GaugeValue, float64(pm.AverageConsumedWatts), chassisPowerVoltageLabelvalues...)
 }
 
+var powerSupplyCounter = 0;
 func parseChassisPowerInfoPowerSupply(ch chan<- prometheus.Metric, chassisID string, chassisPowerInfoPowerSupply redfish.PowerSupply, wg *sync.WaitGroup) {
 	defer wg.Done()
 	chassisPowerInfoPowerSupplyName := chassisPowerInfoPowerSupply.Name
-	chassisPowerInfoPowerSupplyID := chassisPowerInfoPowerSupply.MemberID
+  var chassisPowerInfoPowerSupplyID string
+  if chassisPowerInfoPowerSupply.MemberID != "" {
+	  chassisPowerInfoPowerSupplyID = chassisPowerInfoPowerSupply.MemberID
+  } else {
+    chassisPowerInfoPowerSupplyID = strconv.Itoa(powerSupplyCounter)
+    powerSupplyCounter++
+  }
 	chassisPowerInfoPowerSupplyEfficiencyPercent := chassisPowerInfoPowerSupply.EfficiencyPercent
 	chassisPowerInfoPowerSupplyPowerCapacityWatts := chassisPowerInfoPowerSupply.PowerCapacityWatts
 	chassisPowerInfoPowerSupplyPowerInputWatts := chassisPowerInfoPowerSupply.PowerInputWatts
